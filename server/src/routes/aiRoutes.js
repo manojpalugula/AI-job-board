@@ -1,0 +1,1 @@
+import {Router} from 'express'; import {generate,match,summarize} from '../controllers/aiController.js'; import {protect,authorize} from '../middleware/auth.js'; const router=Router();router.use(protect,authorize('recruiter','admin'));router.post('/generate',generate);router.post('/summarize',summarize);router.post('/match',match);export default router;
