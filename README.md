@@ -67,3 +67,4 @@ server/src/middleware   Authentication and authorisation
 ## Next improvements
 
 Connect a hosted LLM provider, add application and notification routes, introduce file uploads for résumés, use refresh tokens, and add integration tests with a disposable MongoDB instance.
+"# AI-job-board" 
