@@ -607,8 +607,19 @@ function Auth({ user, onAuthenticated }) {
       <Logo />
       <section>
         <p className="eyebrow">{isRegister ? 'CREATE ACCOUNT' : 'WELCOME BACK'}</p>
-        <h1>{isRegister ? 'Start your next<br /><em>chapter.</em>' : 'Find your next<br /><em>great thing.</em>'}</h1>
-        <p>{isRegister ? 'Create an account to discover jobs and manage opportunities.' : 'Sign in to pick up where you left off.'}</p>
+<h1>
+  {isRegister ? (
+    <>
+      Start Your Next<br />
+      <em>Chapter.</em>
+    </>
+  ) : (
+    <>
+      Find Your Next<br />
+      <em>great Thing.</em>
+    </>
+  )}
+</h1>        <p>{isRegister ? 'Create an account to discover jobs and manage opportunities.' : 'Sign in to pick up where you left off.'}</p>
         <form onSubmit={handleSubmit} style={{ display: 'grid', gap: '12px' }}>
           <label>Email<input type="email" required placeholder="you@example.com" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} /></label>
           {isRegister && <>
