@@ -1,70 +1,393 @@
-# Orbit — AI-powered job board
+# 🚀 AI Job Board
 
-Orbit is a full-stack hiring platform designed around a higher-signal candidate and recruiter experience. It pairs a premium responsive React interface with a secure Express/MongoDB API, role-aware authentication, job management, and deterministic AI-assisted job writing.
+> A modern AI-powered full-stack Job Board platform that enables recruiters to create intelligent job postings and candidates to discover and apply for opportunities through a responsive web application.
 
-## Highlights
+![React](https://img.shields.io/badge/React-19-blue?logo=react)
+![Node.js](https://img.shields.io/badge/Node.js-22-green?logo=node.js)
+![Express](https://img.shields.io/badge/Express.js-Backend-black?logo=express)
+![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-green?logo=mongodb)
+![GitHub Actions](https://img.shields.io/badge/CI-GitHub%20Actions-blue?logo=githubactions)
+![Vercel](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)
 
-- Candidate job discovery, search, job detail, saved-job feedback, and application flow
-- Recruiter dashboard with pipeline visualisation and responsive analytics
-- AI job-description drafting, skills extraction, summarisation, and candidate-match endpoints
-- JWT authentication, bcrypt password hashing, Zod validation, Helmet, sanitised requests, and role guards
-- Motion-led responsive design with dark/light mode, accessible labels, keyboard-native controls, loading-ready card layout, and toast feedback
+---
 
-## Architecture
+## 📖 Overview
 
-`client/` is a Vite + React SPA. `server/` is an MVC-style Express REST API backed by Mongoose. The browser proxies `/api` calls to the local API during development. The AI service is intentionally deterministic, so assessment reviewers can exercise the feature without provisioning third-party credentials; replace `aiController.js` with an OpenAI integration when deploying.
+AI Job Board is a full-stack recruitment platform built with modern web technologies. It provides a seamless experience for both recruiters and job seekers while demonstrating production-style architecture, secure authentication, RESTful APIs, CI/CD automation, and deployment.
 
-## Run locally
+The application was developed as a technical assessment to demonstrate full-stack software engineering skills, clean project architecture, and modern development workflows.
+
+---
+
+# ✨ Features
+
+## 👨‍💼 Recruiter
+
+- Secure authentication
+- Create job postings
+- Edit existing jobs
+- Delete job postings
+- View recruiter dashboard
+- Manage posted jobs
+- AI-assisted job description generation
+- AI skills extraction
+- AI-powered content assistance
+
+---
+
+## 👩‍💻 Candidate
+
+- User Registration
+- Secure Login
+- Browse available jobs
+- Search jobs
+- View detailed job information
+- Apply for jobs
+- Responsive mobile-friendly interface
+
+---
+
+# 🛠 Tech Stack
+
+## Frontend
+
+- React
+- Vite
+- React Router
+- Axios
+- CSS3
+
+---
+
+## Backend
+
+- Node.js
+- Express.js
+- MongoDB Atlas
+- Mongoose
+- JWT Authentication
+- bcrypt
+- REST APIs
+
+---
+
+## DevOps
+
+- Git
+- GitHub
+- GitHub Actions
+- Vercel
+
+---
+
+# 🏗 System Architecture
+
+```
+                    React + Vite
+                          │
+                     REST API Calls
+                          │
+                    Express.js Server
+                          │
+                    Authentication
+                          │
+                      MongoDB Atlas
+```
+
+---
+
+# 📂 Project Structure
+
+```
+AI-Job-Board
+│
+├── client
+│   ├── src
+│   ├── public
+│   └── package.json
+│
+├── server
+│   ├── src
+│   │   ├── config
+│   │   ├── controllers
+│   │   ├── middleware
+│   │   ├── models
+│   │   ├── routes
+│   │   └── index.js
+│   │
+│   ├── .env.example
+│   └── package.json
+│
+├── .github
+│   └── workflows
+│       └── ci.yml
+│
+├── README.md
+├── DELIVERY.md
+└── package.json
+```
+
+---
+
+# 🚀 Installation
+
+## Clone Repository
+
+```bash
+git clone https://github.com/manojpalugula/AI-job-board.git
+
+cd AI-job-board
+```
+
+---
+
+## Install Dependencies
 
 ```bash
 npm install
-copy server\\.env.example server\\.env
-# Add your MongoDB Atlas URI and a strong JWT_SECRET to server/.env
+
+cd client
+npm install
+
+cd ../server
+npm install
+```
+
+---
+
+# ⚙ Environment Variables
+
+Create
+
+```
+server/.env
+```
+
+using
+
+```
+server/.env.example
+```
+
+Example
+
+```env
+PORT=5000
+
+MONGODB_URI=your_mongodb_connection_string
+
+JWT_SECRET=your_secret_key
+
+CLIENT_URL=http://localhost:5173
+```
+
+---
+
+# ▶ Running the Project
+
+Start both frontend and backend
+
+```bash
 npm run dev
 ```
 
-The web app starts at `http://localhost:5173`; the API runs at `http://localhost:5000`.
+Frontend
 
-## Environment variables
-
-| Variable | Purpose |
-| --- | --- |
-| `PORT` | API port (defaults to 5000) |
-| `MONGODB_URI` | MongoDB Atlas connection string |
-| `JWT_SECRET` | Signing secret for seven-day tokens |
-| `CLIENT_URL` | Allowed browser origin, e.g. `http://localhost:5173` |
-
-## API
-
-| Method | Endpoint | Access | Purpose |
-| --- | --- | --- |
-| POST | `/api/auth/register` | Public | Create candidate or recruiter account |
-| POST | `/api/auth/login` | Public | Receive JWT and profile |
-| GET | `/api/jobs?q=` | Public | Paginated job search |
-| GET | `/api/jobs/:id` | Public | Job detail |
-| POST/PATCH/DELETE | `/api/jobs` | Recruiter/Admin | Manage own jobs |
-| POST | `/api/ai/generate` | Recruiter/Admin | Generate description and skills |
-| POST | `/api/ai/summarize` | Recruiter/Admin | Summarise description |
-| POST | `/api/ai/match` | Recruiter/Admin | Calculate skills match |
-
-Use `Authorization: Bearer <token>` for protected calls.
-
-## Deployment
-
-Deploy `client` to Vercel with the build command `npm run build -w client` and output directory `client/dist`. Deploy `server` to Render with `npm install` / `npm start -w server`, then set the environment variables above and update `CLIENT_URL` to the Vercel URL. The included GitHub Actions workflow installs, lints, and builds on every push and pull request. Add Vercel/Render deploy actions after configuring their repository secrets.
-
-## Folder map
-
-```text
-client/src/     React routes and premium UI
-server/src/controllers  Request handlers
-server/src/models       Mongoose data models
-server/src/routes       REST route composition
-server/src/middleware   Authentication and authorisation
-.github/workflows       CI verification
+```
+http://localhost:5173
 ```
 
-## Next improvements
+Backend
 
-Connect a hosted LLM provider, add application and notification routes, introduce file uploads for résumés, use refresh tokens, and add integration tests with a disposable MongoDB instance.
-"# AI-job-board" 
+```
+http://localhost:5000
+```
+
+---
+
+# 📡 API Endpoints
+
+## Authentication
+
+| Method | Endpoint |
+|----------|-------------------------|
+| POST | /api/auth/register |
+| POST | /api/auth/login |
+
+---
+
+## Jobs
+
+| Method | Endpoint |
+|----------|-------------------|
+| GET | /api/jobs |
+| GET | /api/jobs/:id |
+| POST | /api/jobs |
+| PATCH | /api/jobs/:id |
+| DELETE | /api/jobs/:id |
+
+---
+
+## Applications
+
+| Method | Endpoint |
+|----------|----------------------|
+| POST | /api/applications |
+| GET | /api/applications |
+
+---
+
+## AI
+
+| Method | Endpoint |
+|----------|----------------|
+| POST | /api/ai/generate |
+| POST | /api/ai/summarize |
+| POST | /api/ai/match |
+
+---
+
+# 🔒 Security Features
+
+- JWT Authentication
+- Password Hashing using bcrypt
+- Protected Routes
+- Environment Variable Configuration
+- REST API Validation
+- Secure Database Connection
+
+---
+
+# 🔄 CI/CD Pipeline
+
+GitHub Actions automatically performs:
+
+- Install dependencies
+- Build project
+- Verify application builds successfully
+- Maintain consistent deployment workflow
+
+---
+
+# ☁ Deployment
+
+Frontend
+
+**Vercel**
+
+Backend
+
+**Node.js / Express**
+
+Database
+
+**MongoDB Atlas**
+
+---
+
+# 📸 Screenshots
+
+Add screenshots before submitting.
+
+```
+docs/
+
+home.png
+
+login.png
+
+dashboard.png
+
+jobs.png
+
+ai-generator.png
+```
+
+Example
+
+```markdown
+## Home
+
+![Home](docs/home.png)
+
+## Dashboard
+
+![Dashboard](docs/dashboard.png)
+
+## AI Generator
+
+![AI](docs/ai-generator.png)
+```
+
+---
+
+# 💼 Business Value
+
+The platform simplifies the recruitment process by providing:
+
+- Faster job posting workflow
+- Centralized job management
+- Secure authentication
+- AI-assisted content generation
+- Responsive user experience
+- Scalable full-stack architecture
+
+---
+
+# 🚀 Future Improvements
+
+- Resume Upload
+- Resume Parsing using AI
+- AI Resume Ranking
+- Interview Scheduling
+- Email Notifications
+- Company Profiles
+- Saved Jobs
+- Job Recommendations
+- Admin Dashboard
+- Analytics Dashboard
+
+---
+
+# 🧪 Testing
+
+To verify the application:
+
+- Register a new account
+- Login
+- Create a job
+- Browse jobs
+- Search jobs
+- Apply for a job
+- Test AI features
+- Verify protected routes
+
+---
+
+# 👨‍💻 Author
+
+**Palugula Manoj Kumar**
+
+Software Developer
+
+GitHub
+
+https://github.com/manojpalugula
+
+LinkedIn
+
+(Add your LinkedIn profile)
+
+---
+
+# 📄 License
+
+This project is intended for educational purposes and technical assessment submission.
+
+---
+
+## ⭐ Thank You
+
+Thank you for reviewing this project.
+
+This application demonstrates modern full-stack development practices including React, Node.js, Express, MongoDB, REST APIs, JWT Authentication, CI/CD with GitHub Actions, deployment, and AI-assisted functionality.
