@@ -296,11 +296,12 @@ home.png
 
 login.png
 
-dashboard.png
+SignUp
 
-jobs.png
+Candidate
 
-ai-generator.png
+Recruiter
+
 ```
 
 Example
@@ -376,7 +377,7 @@ https://github.com/manojpalugula
 
 LinkedIn
 
-(Add your LinkedIn profile)
+https://www.linkedin.com/in/manoj-kumar-846355280?utm_source=share_via&utm_content=profile&utm_medium=member_android
 
 ---
 
